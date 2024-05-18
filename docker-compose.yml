@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: python-text-replacer
+    volumes:
+      - .:/app
+    # 作業ディレクトリを作成
+    working_dir: /app
+    command: ["python", "main.py"]
