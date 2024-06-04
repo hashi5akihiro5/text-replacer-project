@@ -1,14 +1,15 @@
 import re
 
+
 def replace_commas(input_file):
-    with open(input_file, 'r', encoding='utf-8') as file:
+    with open(input_file, "r", encoding="utf-8") as file:
         content = file.read()
-    
+
     # コンマを全角コンマに置換
-    content = content.replace(',', '、')
+    content = content.replace(",", "、")
 
     # 全角コンマの後に空文字削除
-    content = re.sub(r'、\s', '、', content)
+    content = re.sub(r"、\s", "、", content)
 
     # 改行をリセット
     content = "".join(content.splitlines())
@@ -26,6 +27,5 @@ def replace_commas(input_file):
 
 
 if __name__ == "__main__":
-    input_file = "text_file/202307_航海3級_航海/202307_航海3級_航海.pdf_2.txt"
+    input_file = "text_file/202307_航海3級_航海/202307_航海3級_航海.pdf_5.txt"
     print(replace_commas(input_file))
-    
