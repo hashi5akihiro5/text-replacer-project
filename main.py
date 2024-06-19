@@ -55,6 +55,15 @@ def add_space(content):
     return content
 
 
+# 漢数字に変換
+def replace_str_to_kanjinum(content):
+    # "(一)に変換"
+    content = content.replace("(土)", " (一)")
+    content = re.sub(r"(\d+)H\)", r"\1 (一)", content)
+
+    return content
+
+
 def replace_commas(input_file):
     with open(input_file, "r", encoding="utf-8") as file:
         content = file.read()
@@ -91,6 +100,9 @@ def replace_commas(input_file):
 
     # スペースを作成
     content = add_space(content)
+
+    # 漢数字に変換
+    content = replace_str_to_kanjinum(content)
 
     return content
 
