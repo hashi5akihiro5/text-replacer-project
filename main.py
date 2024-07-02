@@ -43,6 +43,9 @@ def add_line_break(content):
     # "。"の後に改行を追加、ただし")"の場合を除く
     content = re.sub(r"。(?!\))", r"。\n", content)
 
+    # 航海1級 航海大問4の場合、改行を追加
+    content = re.sub(r"4 商船が一般", r"\n4 商船が一般", content)
+
     return content
 
 
