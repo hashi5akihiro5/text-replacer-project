@@ -1,5 +1,12 @@
 import re
 
+# text_fileの変数
+examdate = "202404"
+navigation_or_engineering = "航海"
+subject = "航海"
+grade = "1級"
+text_file_num = 1
+
 
 def digit_to_kanji(digit):
     kanji_numbers = ["〇", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
@@ -17,8 +24,8 @@ def delete_line_break(content):
     content = re.sub(r"\nまた", r"また", content)
     content = re.sub(r"\n また", r"また", content)
 
-    # "~"の後に改行がある場合、その改行を削除
-    content = re.sub(r"~\n", r"~", content)
+    # "〜"の後に改行がある場合、その改行を削除
+    content = re.sub(r"〜\n", r"〜", content)
 
     # "の"の後に改行がある場合、その改行を削除
     content = re.sub(r"の\n", r"の", content)
@@ -27,6 +34,7 @@ def delete_line_break(content):
     content = re.sub(r"び\n", r"び", content)
 
     # "理"の前に改行がある場合、その改行を削除
+    content = re.sub(r"。\n理", r"。理", content)
     content = re.sub(r"。\n 理", r"。理", content)
 
     # "計"の前に改行がある場合、その改行を削除
@@ -40,6 +48,13 @@ def delete_line_break(content):
     # "ただし"の前に改行がある場合、その改行を削除
     content = re.sub(r"。\n ただし", r"。ただし", content)
     content = re.sub(r"。\nただし", r"。ただし", content)
+
+    # "◯つあげよ。"の前に改行がある場合、その改行を削除
+    content = re.sub(r"。\n (\d)つあげよ。", r"。\1つあげよ。", content)
+
+    # "図示して説明せよ。"の前に改行がある場合、その改行を削除
+    content = re.sub(r"。\n 図示して説明せよ。", r"。図示して説明せよ。", content)
+    content = re.sub(r"。\n図示して説明せよ。", r"。図示して説明せよ。", content)
 
     return content
 
@@ -58,8 +73,8 @@ def add_space(content):
 # 漢数字に変換
 def replace_str_to_kanjinum(content):
     # "(一)に変換"
-    content = content.replace("(土)", " (一)")
-    content = re.sub(r"(\d+)H\)", r"\1 (一)", content)
+    content = content.replace("(土)", " (一)").replace("台)", " (一)")
+    content = re.sub(r"(\d+)H\)", r"\1 (一) ", content)
 
     return content
 
@@ -108,5 +123,5 @@ def replace_commas(input_file):
 
 
 if __name__ == "__main__":
-    input_file = "text_file/202402_航海1級_航海/202402_航海1級_航海.pdf_3.txt"
+    input_file = f"text_file/{examdate}_{navigation_or_engineering}{grade}_{subject}/{examdate}_{navigation_or_engineering}{grade}_{subject}.pdf_{text_file_num}.txt"
     print(replace_commas(input_file))
