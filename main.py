@@ -73,6 +73,10 @@ def delete_line_break(content):
     content = re.sub(r"。\n次", r"。次", content)
     content = re.sub(r"。\n 次", r"。次", content)
 
+    # "甲"の前に改行がある場合、その改行を削除
+    content = re.sub(r"。\n甲", r"。甲", content)
+    content = re.sub(r"。\n 甲", r"。甲", content)
+
     # "ただし"の前に改行がある場合、その改行を削除
     content = re.sub(r"。\n ただし", r"。ただし", content)
     content = re.sub(r"。\nただし", r"。ただし", content)
@@ -103,6 +107,8 @@ def replace_str_to_kanjinum(content):
     # "(一)に変換"
     content = content.replace("(土)", " (一)").replace("台)", " (一)")
     content = re.sub(r"(\d+)H\)", r"\1 (一) ", content)
+    # "任意の数字"+")"の場合、"任意の数字"+"(一)"
+    content = re.sub(r"(?<!\()\b(\d+)\)", r"\1 (一) ", content)
 
     return content
 
