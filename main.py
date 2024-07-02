@@ -139,5 +139,8 @@ def replace_commas(input_file):
 
 
 if __name__ == "__main__":
-    input_file = f"text_file/{examdate}_{navigation_or_engineering}{grade}_{subject}/{examdate}_{navigation_or_engineering}{grade}_{subject}.pdf_{text_file_num}.txt"
+    input_file = (
+        f"text_file/{examdate}_{navigation_or_engineering}{grade}_{subject}/"
+        f"{examdate}_{navigation_or_engineering}{grade}_{subject}.pdf_{text_file_num}.txt"
+    )
     print(replace_commas(input_file))
