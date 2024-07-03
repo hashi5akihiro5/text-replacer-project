@@ -5,7 +5,7 @@ examdate = "202404"
 navigation_or_engineering = "航海"
 subject = "航海"
 grade = "1級"
-text_file_num = 1
+text_file_num = 2
 
 
 def digit_to_kanji(digit):
@@ -84,6 +84,10 @@ def delete_line_break(content):
     content = re.sub(r"。\n ただし", r"。ただし", content)
     content = re.sub(r"。\nただし", r"。ただし", content)
 
+    # "それぞれ"の前に改行がある場合、その改行を削除
+    content = re.sub(r"。\n それぞれ", r"。それぞれ", content)
+    content = re.sub(r"。\nそれぞれ", r"。それぞれ", content)
+
     # "◯つあげよ。"の前に改行がある場合、その改行を削除
     content = re.sub(r"。\n (\d)つあげよ。", r"。\1つあげよ。", content)
 
@@ -109,7 +113,13 @@ def add_space(content):
 def replace_str_to_kanjinum(content):
     # "(一)に変換"
     content = content.replace("(土)", " (一)").replace("台)", " (一)")
+
+    # "任意の数字"+ "H" + ")の場合、"任意の数字"+"(一)"
     content = re.sub(r"(\d+)H\)", r"\1 (一) ", content)
+
+    # "任意の数字"+ "H", "任意の数字"+"(一)"
+    content = re.sub(r"(\d+)H", r"\1 (一) ", content)
+
     # "任意の数字"+")"の場合、"任意の数字"+"(一)"
     content = re.sub(r"(?<!\()\b(\d+)\)", r"\1 (一) ", content)
 
