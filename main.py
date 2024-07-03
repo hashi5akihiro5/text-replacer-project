@@ -5,7 +5,7 @@ examdate = "202404"
 navigation_or_engineering = "航海"
 subject = "航海"
 grade = "1級"
-text_file_num = 2
+text_file_num = 3
 
 
 def digit_to_kanji(digit):
@@ -90,6 +90,7 @@ def delete_line_break(content):
 
     # "◯つあげよ。"の前に改行がある場合、その改行を削除
     content = re.sub(r"。\n (\d)つあげよ。", r"。\1つあげよ。", content)
+    content = re.sub(r"。\n(\d)つあげよ。", r"。\1つあげよ。", content)
 
     # "図示して説明せよ。"の前に改行がある場合、その改行を削除
     content = re.sub(r"。\n 図示して説明せよ。", r"。図示して説明せよ。", content)
