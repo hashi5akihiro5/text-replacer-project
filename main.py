@@ -5,7 +5,7 @@ examdate = "202404"
 navigation_or_engineering = "航海"
 subject = "航海"
 grade = "1級"
-text_file_num = 3
+text_file_num = 5
 
 
 def digit_to_kanji(digit):
@@ -51,50 +51,33 @@ def add_line_break(content):
 
 # 改行を削除
 def delete_line_break(content):
-    # "また"の前に改行がある場合、その改行を削除
-    content = re.sub(r"\nまた", r"また", content)
-    content = re.sub(r"\n また", r"また", content)
-
-    # "〜"の後に改行がある場合、その改行を削除
-    content = re.sub(r"〜\n", r"〜", content)
-
-    # "の"の後に改行がある場合、その改行を削除
-    content = re.sub(r"の\n", r"の", content)
-
-    # "び"の後に改行がある場合、その改行を削除
-    content = re.sub(r"び\n", r"び", content)
-
-    # "理"の前に改行がある場合、その改行を削除
-    content = re.sub(r"。\n理", r"。理", content)
-    content = re.sub(r"。\n 理", r"。理", content)
-
-    # "計"の前に改行がある場合、その改行を削除
-    content = re.sub(r"。\n計", r"。計", content)
-    content = re.sub(r"。\n 計", r"。計", content)
-
-    # "次"の前に改行がある場合、その改行を削除
-    content = re.sub(r"。\n次", r"。次", content)
-    content = re.sub(r"。\n 次", r"。次", content)
-
-    # "甲"の前に改行がある場合、その改行を削除
-    content = re.sub(r"。\n甲", r"。甲", content)
-    content = re.sub(r"。\n 甲", r"。甲", content)
-
-    # "ただし"の前に改行がある場合、その改行を削除
-    content = re.sub(r"。\n ただし", r"。ただし", content)
-    content = re.sub(r"。\nただし", r"。ただし", content)
-
-    # "それぞれ"の前に改行がある場合、その改行を削除
-    content = re.sub(r"。\n それぞれ", r"。それぞれ", content)
-    content = re.sub(r"。\nそれぞれ", r"。それぞれ", content)
-
-    # "◯つあげよ。"の前に改行がある場合、その改行を削除
-    content = re.sub(r"。\n (\d)つあげよ。", r"。\1つあげよ。", content)
-    content = re.sub(r"。\n(\d)つあげよ。", r"。\1つあげよ。", content)
-
-    # "図示して説明せよ。"の前に改行がある場合、その改行を削除
-    content = re.sub(r"。\n 図示して説明せよ。", r"。図示して説明せよ。", content)
-    content = re.sub(r"。\n図示して説明せよ。", r"。図示して説明せよ。", content)
+    patterns = [
+        (r"〜\n", r"〜"),  # "〜"の後に改行がある場合、その改行を削除
+        (r"の\n", r"の"),  # "の"の後に改行がある場合、その改行を削除
+        (r"び\n", r"び"),  # "び"の後に改行がある場合、その改行を削除
+        (r"\n\s*また", r"また"),  # "また"の前に改行がある場合、その改行を削除
+        (r"\n\s*ただし", r"ただし"),  # "ただし"の前に改行がある場合、その改行を削除
+        (
+            r"\n\s*それぞれ",
+            r"それぞれ",
+        ),  # "それぞれ"の前に改行がある場合、その改行を削除
+        (
+            r"\n\s*(\d)つあげよ。",
+            r"\\1つあげよ。",
+        ),  # "(\d)つあげよ。"の前に改行がある場合、その改行を削除
+        (r"\n\s*理", r"理"),  # "理"の前に改行がある場合、その改行を削除
+        (r"\n\s*計", r"計"),  # "計"の前に改行がある場合、その改行を削除
+        (r"\n\s*次", r"次"),  # "次"の前に改行がある場合、その改行を削除
+        (r"\n\s*甲", r"甲"),  # "甲"の前に改行がある場合、その改行を削除
+        (r"\n\s*要点", r"要点"),  # "要点"の前に改行がある場合、その改行を削除
+        (r"\n\s*概要", r"概要"),  # "概要"の前に改行がある場合、その改行を削除
+        (
+            r"\n\s*図示して説明せよ。",
+            r"図示して説明せよ。",
+        ),  # "図示して説明せよ。"の前に改行がある場合、その改行を削除
+    ]
+    for pattern, replacement in patterns:
+        content = re.sub(pattern, replacement, content)
 
     return content
 
