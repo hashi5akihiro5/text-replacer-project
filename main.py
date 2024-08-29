@@ -1,11 +1,11 @@
 import re
 
 # text_fileの変数
-examdate = "202404"
+examdate = "202402"
 navigation_or_engineering = "航海"
 subject = "航海"
-grade = "1級"
-text_file_num = 5
+grade = "2級"
+text_file_num = 0
 
 
 def digit_to_kanji(digit):
@@ -130,9 +130,6 @@ def replace_commas(input_file):
 
     # 改行をリセット
     content = "".join(content.splitlines())
-
-    # '()'内の数字を漢数字置換
-    # content = re.sub(r"\((\d)\)", replace_digits_with_kanji, content)
 
     # 改行を追加
     content = add_line_break(content)
