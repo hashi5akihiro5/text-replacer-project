@@ -115,6 +115,9 @@ def replace_str_to_kanjinum(content):
     # "任意の数字"+")"の場合、"任意の数字"+"(一)"
     content = re.sub(r"(?<!\()\b(\d+)\)", r"\1 (一) ", content)
 
+    # 前 "("がない場合、"("を追加
+    content = re.sub(r"(?<!\()(?=[一二三四])", "(", content)
+
     return content
 
 
