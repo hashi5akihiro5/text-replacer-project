@@ -1,11 +1,19 @@
 import re
 
+from .textfile_variable import (
+    EXAMDATE,
+    GRADE,
+    NAVIGATION_OR_ENGINEERING,
+    SUBJECT,
+    TEXTFILE_NUM,
+)
+
 # text_fileの変数
-examdate = "202402"
-navigation_or_engineering = "航海"
-subject = "航海"
-grade = "2級"
-text_file_num = 0
+examdate = EXAMDATE
+navigation_or_engineering = NAVIGATION_OR_ENGINEERING
+subject = SUBJECT
+grade = GRADE
+text_file_num = TEXTFILE_NUM
 
 
 def digit_to_kanji(digit):
@@ -62,7 +70,7 @@ def delete_line_break(content):
             r"それぞれ",
         ),  # "それぞれ"の前に改行がある場合、その改行を削除
         (
-            r"\n\s*(\d)つあげよ。",
+            r"\n\s*(\d)\s*つあげよ。",
             r"\1つあげよ。",
         ),  # "(\d)つあげよ。"の前に改行がある場合、その改行を削除
         (
@@ -104,7 +112,9 @@ def add_space(content):
 # 漢数字に変換
 def replace_str_to_kanjinum(content):
     # "(一)に変換"
-    content = content.replace("(土)", " (一)").replace("台)", " (一)")
+    content = (
+        content.replace("(土)", " (一)").replace("台)", " (一)").replace("日)", " (一)")
+    )
 
     # "任意の数字"+ "H" + ")の場合、"任意の数字"+"(一)"
     content = re.sub(r"(\d+)H\)", r"\1 (一) ", content)
