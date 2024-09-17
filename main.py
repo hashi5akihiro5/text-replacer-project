@@ -1,4 +1,7 @@
 import re
+import sys
+
+sys.dont_write_bytecode = True
 
 from textfile_variable import (
     EXAMDATE,
