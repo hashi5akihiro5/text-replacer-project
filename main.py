@@ -1,6 +1,6 @@
 import re
 
-from .textfile_variable import (
+from textfile_variable import (
     EXAMDATE,
     GRADE,
     NAVIGATION_OR_ENGINEERING,
