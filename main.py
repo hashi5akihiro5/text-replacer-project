@@ -96,6 +96,10 @@ def delete_line_break(content):
             r"\n\s*図示して説明せよ。",
             r"図示して説明せよ。",
         ),  # "図示して説明せよ。"の前に改行がある場合、その改行を削除
+        (
+            r"\n\s*(\d)例をあげよ。",
+            r"\1例をあげよ。",
+        ),  # "◯例をあげよ。"の前に改行がある場合、その改行を削除
     ]
     for pattern, replacement in patterns:
         content = re.sub(pattern, replacement, content)
