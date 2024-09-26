@@ -118,7 +118,10 @@ def add_space(content):
 def replace_str_to_kanjinum(content):
     # "(一)に変換"
     content = (
-        content.replace("(土)", " (一)").replace("台)", " (一)").replace("日)", " (一)")
+        content.replace("(土)", " (一)")
+        .replace("台)", " (一)")
+        .replace("台", " (一)")
+        .replace("日)", " (一)")
     )
 
     # "任意の数字"+ "H" + ")の場合、"任意の数字"+"(一)"
